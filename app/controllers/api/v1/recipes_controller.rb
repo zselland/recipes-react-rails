@@ -16,6 +16,8 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def show
+    ingredients = @recipe.recipe_ingredients
+    @recipe.ingredients = ingredients.as_json
     render json: @recipe
   end
 
@@ -27,7 +29,7 @@ class Api::V1::RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.permit(:name, :image, :ingredients, :instruction)
+    params.require(:recipe).permit(:name, :image, :instruction, recipe_ingredients_attributes: [:ingredient_name, :quantity])
   end
 
   def set_recipe

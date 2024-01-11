@@ -46,13 +46,11 @@ const Recipe = () => {
 
   const ingredientList = () => {
     let ingredientList = "No ingredients available";
-
     if (recipe.ingredients.length > 0) {
       ingredientList = recipe.ingredients
-        .split(",")
         .map((ingredient, index) => (
           <li key={index} className="list-group-item">
-            {ingredient}
+            {`${ingredient.quantity} ${ingredient.ingredient_name}`}
           </li>
         ));
     }
